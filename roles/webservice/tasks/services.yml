@@ -1,0 +1,9 @@
+---
+- name: Enable and Start Services
+  service:
+    name: "{{ item }}"
+    state: restarted
+    enabled: true
+  loop:
+    - "{{ httpd_svc }}"
+    - "{{ firewalld_svc }}"
