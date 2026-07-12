@@ -1,0 +1,7 @@
+---
+- name: Install Packages
+  ansible.builtin.dnf:
+    name:
+      - "{{ httpd_pkgs }}"
+      - "{{ firewalld_pkgs }}"
+    state: present
