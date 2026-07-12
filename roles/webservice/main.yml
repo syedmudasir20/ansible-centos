@@ -1,0 +1,6 @@
+---
+httpd_pkgs: httpd
+httpd_svc: httpd
+httpd_rule: http
+firewalld_pkgs: firewalld
+firewalld_svc: firewalld
