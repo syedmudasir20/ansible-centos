@@ -1,0 +1,11 @@
+---
+- name: Enable firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: started
+- name: Add an exception in the firewall
+  ansible.posix.firewalld:
+    service: "{{ httpd_rule }}"
+    permanent: true
+    immediate: true
+    state: enabled
