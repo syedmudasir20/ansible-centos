@@ -1,6 +1,6 @@
 ---
 - name: awx test playbook
-  hosts: eoc-node1
+  hosts: ansible-node1
   become: yes    
   tasks:
     - name: Run demo task on pinging servers only
