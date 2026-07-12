@@ -1,6 +1,6 @@
 ---
 - name: awx test playbook
-  hosts: webserver
+  hosts: test
   become: yes    
   tasks:
     - name: Run demo task on pinging servers only
