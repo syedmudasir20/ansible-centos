@@ -1,0 +1,23 @@
+---
+- name: Simple job scheduling demo
+  hosts: test
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Create log directory
+      file:
+        path: /var/log/awx-demo
+        state: directory
+        mode: '0755'
+
+    - name: Write schedule run log
+      lineinfile:
+        path: /var/log/awx-demo/schedule_run.log
+        create: yes
+        line: "Job ran on {{ inventory_hostname }} at {{ lookup('pipe', 'date +%Y-%m-%d_%H:%M:%S') }}"
+        mode: '0644'
+
+    - name: Display confirmation message
+      debug:
+        msg: "Scheduled job executed successfully on {{ inventory_hostname }}"

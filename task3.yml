@@ -1,0 +1,9 @@
+---
+- name: Create /tmp/foo on ansible-node1
+  hosts: ansible-node1
+  become: true
+  tasks:
+    - name: Ensure /tmp/foo file exists
+      ansible.builtin.file:
+        path: /tmp/foo
+        state: touch

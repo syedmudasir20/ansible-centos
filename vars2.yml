@@ -1,0 +1,9 @@
+- hosts: all
+  vars:
+    continents: [Africa, Asia, South America, North America, Europe]
+  tasks:
+    - name: Ansible Array Variable Example
+      debug:
+        msg: "{{ item }}"
+      with_items:
+      - "{{ continents }}"

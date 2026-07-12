@@ -1,0 +1,11 @@
+---
+- name: Service health check using custom module
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure service is running
+      service_health:
+        service_name: "sshd"
+      register: output
+    - debug:
+        var: output

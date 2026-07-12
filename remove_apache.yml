@@ -1,0 +1,10 @@
+---
+- hosts: "webservers,dev"
+  tasks:
+    - service:
+        name: httpd
+        enabled: no
+        state: stopped
+    - dnf:
+        name: httpd
+        state: absent

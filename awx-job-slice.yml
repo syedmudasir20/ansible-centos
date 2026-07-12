@@ -1,0 +1,20 @@
+---
+- name: AWX simple job-slicing demo
+  hosts: webserver
+  become: true
+
+  tasks:
+    - name: Show which hosts this slice has
+      debug:
+        msg:
+          - "Slice hosts: {{ ansible_play_hosts_all | join(', ') }}"
+          - "This host: {{ inventory_hostname }}"
+
+    - name: Write slice marker file (per-host)
+      copy:
+        dest: /tmp/awx_slice_marker.txt
+        content: |
+          Host: {{ inventory_hostname }}
+          Slice hosts: {{ ansible_play_hosts_all | join(', ') }}
+          Timestamp: {{ lookup('pipe','date -u +"%Y-%m-%dT%H:%M:%SZ"') }}
+        mode: '0644'

@@ -1,0 +1,17 @@
+---
+- hosts: ansible-node1
+  become: yes
+  tasks:
+    - name: delete users
+      user:
+        name: '{{ item }}'
+        state: absent
+      loop:
+        - james
+        - mary
+        - robert
+        - irwin
+        - joe
+        - john
+        - mike
+        - andrew

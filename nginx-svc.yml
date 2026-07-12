@@ -1,0 +1,15 @@
+---
+- name: Install and start Nginx using custom service_health module
+  hosts: ansible-node2
+  become: yes
+  tasks:
+    - name: Install nginx package
+      ansible.builtin.package:
+        name: nginx
+        state: present
+    - name: Ensure nginx service is running using custom module
+      service_health:
+        service_name: nginx
+      register: nginx_status
+    - debug:
+        msg: "Nginx status: {{ nginx_status.status }}"

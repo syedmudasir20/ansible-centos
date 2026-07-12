@@ -1,0 +1,14 @@
+---
+- hosts: ansible-node1
+  become: yes
+  tasks:
+    - name: create new users
+      user:
+        name: '{{ item }}'
+        state: present
+      loop:
+        - james
+        - mary
+        - robert
+        - irwin
+        - joe

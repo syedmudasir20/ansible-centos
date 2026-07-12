@@ -1,0 +1,25 @@
+---
+- name: Example Playbook for Windows
+  hosts: windows_hosts
+  gather_facts: true
+
+  tasks:
+    - name: Ensure a directory exists
+      ansible.builtin.win_file:
+        path: C:\Users\win-admin\Documents
+        state: directory
+
+    - name: Copy a file to Windows
+      ansible.builtin.win_copy:
+        src: sample.txt
+        dest: C:\Users\win-admin\Documents\demo.txt
+
+    - name: Debug information
+      ansible.builtin.debug:
+        var: ansible_facts
+
+    - name: Ensure a service is running
+      ansible.builtin.win_service:
+        name: wuauserv
+        state: started
+        start_mode: auto

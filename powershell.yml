@@ -1,0 +1,14 @@
+---
+- name: Example Playbook for Windows
+  hosts: windows_hosts
+  gather_facts: false
+
+  tasks:
+    - name: Create PowerShell script
+      ansible.builtin.copy:
+        content: |
+          Write-Output "Hello from Ansible on Windows!"
+        dest: C:\Users\win-admin\Documents\script.ps1
+
+    - name: Execute PowerShell script on Windows
+      ansible.windows.win_command: powershell.exe -ExecutionPolicy Bypass -File C:\Users\win-admin\Documents\script.ps1

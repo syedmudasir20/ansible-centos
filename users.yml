@@ -1,0 +1,16 @@
+---
+- hosts: ansible-node1
+  become: yes
+  tasks:
+    - name: Create new user john
+      user:
+        name: john
+        state: present
+    - name: craete new user mike
+      user:
+        name: mike
+        state: present
+    - name: create new user andrew
+      user:
+        name: andrew
+        state: present

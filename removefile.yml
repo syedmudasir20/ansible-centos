@@ -1,0 +1,8 @@
+---
+- name: Use the file module to remove a file
+  hosts: all
+  tasks:
+    - name: Remove a file from managed hosts
+      file:
+        path: /users.txt
+        state: absent

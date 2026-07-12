@@ -1,0 +1,10 @@
+---
+- name: awx test playbook
+  hosts: webserver
+  become: yes    
+  tasks:
+    - name: Run demo task on pinging servers only
+      ping:
+    - name: debug task
+      debug:
+        msg: "{{ ansible_facts }}" 

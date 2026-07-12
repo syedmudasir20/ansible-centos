@@ -1,0 +1,11 @@
+---
+- name: Schedule a cron job for natasha
+  hosts: ansible-node2
+  become: yes
+  tasks:
+    - name: Schedule cron job for admin
+      ansible.builtin.cron:
+        name: "cron task"
+        user: admin
+        job: 'logger "Time: $(date)"'
+        minute: "*/2"

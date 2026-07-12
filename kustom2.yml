@@ -1,0 +1,39 @@
+---
+- hosts: "controller"
+  become: yes
+  tasks:
+    - name: adding awx-demo-instance.yml
+      shell: |
+        cat > awx-demo.yml << EOF
+        ---
+        apiVersion: awx.ansible.com/v1beta1
+        kind: AWX
+        metadata:
+          name: awx-demo
+        spec:
+          service_type: nodeport
+        EOF
+
+    - name: changing kustomization file
+      shell: |
+        cat > kustomization.yml << EOF
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+
+        resources:
+          - github.com/ansible/awx-operator/config/default?ref=2.19.1
+          - awx-demo.yml
+
+        images:
+          - name: quay.io/ansible/awx-operator
+            newTag: 2.19.1
+
+          - name: gcr.io/kubebuilder/kube-rbac-proxy
+            newName: quay.io/brancz/kube-rbac-proxy
+            newTag: v0.15.0
+
+        namespace: awx
+        EOF
+
+    - name: apply the changes
+      shell: kubectl apply -k .

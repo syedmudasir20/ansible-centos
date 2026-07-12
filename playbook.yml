@@ -1,0 +1,17 @@
+---
+- name: Update web server
+  hosts: "webservers,dev"
+  become: yes
+  tasks:
+    - name: Latest httpd package installed
+      dnf:
+        name: httpd
+        state: latest
+      notify:
+        - Restart httpd
+  handlers:
+    - name: Restart httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: restarted
